@@ -8,8 +8,8 @@ repositories {
 }
 
 def allureVersion = "2.13.9",
-        selenideVersion = "5.23.0",
-        junitVersion = "5.7.2"
+    selenideVersion = "5.23.0",
+    junitVersion = "5.7.2"
 
 allure {
     version = allureVersion
@@ -26,6 +26,7 @@ dependencies {
             "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
             "com.github.javafaker:javafaker:1.0.2",
+            "org.aeonbits.owner:owner:1.0.12",
             "org.junit.jupiter:junit-jupiter-api:$junitVersion")
     testRuntimeOnly(
             "org.slf4j:slf4j-simple:1.7.29",
@@ -39,11 +40,11 @@ tasks.withType(JavaCompile) {
 }
 
 tasks.withType(Test) {
+    systemProperties(System.getProperties())
     useJUnitPlatform()
 
     testLogging {
         lifecycle {
-//            events "started", "failed"
             events "started", "skipped", "failed", "standard_error", "standard_out"
             exceptionFormat "short"
         }
