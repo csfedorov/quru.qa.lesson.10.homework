@@ -15,7 +15,8 @@ public class RegistrationWithOwnerTest extends TestBase {
     void registrationWithOwnerTest() {
         String login = credentials.login();
         String password = credentials.password();
-        String remoteHost = System.getProperty("remoteHost", "selenoid.autotests.cloud");
+        String remoteHost = System.getProperty("remoteHost");
+        System.out.println("Remote host from system property: " + (remoteHost != null && !remoteHost.isEmpty()));
         Configuration.remote = format("https://%s:%s@%s/wd/hub/", login, password, remoteHost);
         new RegistrationTest().positiveFillTest();
     }
